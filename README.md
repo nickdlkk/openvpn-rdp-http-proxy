@@ -11,7 +11,7 @@
 - HTTP/HTTPS 代理：通过 Squid 提供 HTTP/HTTPS 代理服务
 - RDP 端口转发：通过 socat 转发 RDP 流量到目标服务器
 - 自动重连：内置健康检查机制确保 VPN 连接稳定
-- 轻量级：基于 Ubuntu 22.04 的国内源替换镜像，仅包含必要组件
+- 轻量级：基于 [Ubuntu 22.04 的国内源替换镜像](https://github.com/nickdlkk/ubuntu)，仅包含必要组件
 - 简单配置：挂载单个配置文件即可启动
 
 ## 快速开始

@@ -32,3 +32,12 @@ jobs:
           context: .
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/${{ env.REPO_NAME }}:latest
+
+      - name: Create or update GitHub Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          RELEASE_NAME="Build for branch ${{ env.BRANCH_NAME }}"
+          RELEASE_BODY="Docker image has been built and pushed successfully.\n\nTag: ${{ secrets.DOCKER_USERNAME }}/${{ env.REPO_NAME }}:latest"
+          gh release create "${{ env.REPO_NAME }}" --notes "$RELEASE_BODY" || \
+          gh release edit "${{ env.REPO_NAME }}" --notes "$RELEASE_BODY"
