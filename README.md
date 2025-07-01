@@ -19,7 +19,7 @@
 ### 构建镜像
 
 ```bash
-docker build -t nickdlk/vpn-rdp-http-proxy .
+docker build -t nickdlk/openvpn-rdp-http-proxy .
 ```
 
 ### 运行容器
@@ -33,7 +33,7 @@ docker run -d --name vpn-proxy \
   -p 13389:3389 \           # RDP代理端口
   -v /path/to/vpn/configs:/etc/openvpn/config:ro \
   -e RDP_TARGET=10.8.0.100 \  # VPN网络内的目标RDP服务器IP
-  nickdlk/vpn-rdp-http-proxy:latest
+  nickdlk/openvpn-rdp-http-proxy:latest
 ```
 
 ## 配置指南
@@ -163,7 +163,7 @@ graph TD
 ### 版本更新
 1. 拉取最新镜像：
 ```bash
-docker pull nickdlk/vpn-rdp-http-proxy:latest
+docker pull nickdlk/openvpn-rdp-http-proxy:latest
 ```
 1. 重启容器：
 ```bash
@@ -171,3 +171,7 @@ docker stop vpn-proxy
 docker rm vpn-proxy
 # 使用原始 run 命令重新创建容器
 ```
+
+# 参考
+
+https://github.com/Ericwyn/ovpn-proxy
