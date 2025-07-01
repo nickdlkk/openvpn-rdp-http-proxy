@@ -38,6 +38,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           RELEASE_NAME="Build for branch ${{ env.BRANCH_NAME }}"
-          RELEASE_BODY="Docker image has been built and pushed successfully.\n\nTag: ${{ secrets.DOCKER_USERNAME }}/${{ env.REPO_NAME }}:latest"
+          RELEASE_BODY="Docker image has been built and pushed successfully.
+                        Tag: ${{ secrets.DOCKER_USERNAME }}/${{ env.REPO_NAME }}:latest"
           gh release create "${{ env.REPO_NAME }}" --notes "$RELEASE_BODY" || \
           gh release edit "${{ env.REPO_NAME }}" --notes "$RELEASE_BODY"

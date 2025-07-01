@@ -7,12 +7,19 @@ RUN apt update && \
         openvpn \
         iproute2 \
         socat \
+        squid \
         ca-certificates && \
     # 清理缓存
     apt clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
     # 创建OpenVPN配置目录
-    mkdir -p /etc/openvpn/config
+    mkdir -p /etc/openvpn/config && \
+    # 配置 squid
+    mv /etc/squid/squid.conf /etc/squid/squid.conf.back && \
+    touch /etc/squid/squid.conf && \
+    echo "http_access allow all" >> /etc/squid/squid.conf && \
+    echo "http_access allow CONNECT all" >> /etc/squid/squid.conf && \
+    echo "http_port 8000" >> /etc/squid/squid.conf 
 
 # 复制脚本文件
 COPY runOvpn.sh /runOvpn.sh

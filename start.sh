@@ -2,6 +2,10 @@
 
 set -e
 
+echo "==== Try Start Squid Proxy ===="
+# 启动 squid
+squid
+
 # 启动OpenVPN (后台运行)
 echo "=== Starting OpenVPN ==="
 /runOvpn.sh &
@@ -11,6 +15,7 @@ OPENVPN_PID=$!
 echo "=== Starting RDP Forwarder ==="
 /rdp-forward.sh &
 RDP_FORWARD_PID=$!
+
 
 # 捕获退出信号
 trap "kill $OPENVPN_PID $RDP_FORWARD_PID 2>/dev/null; exit 0" SIGINT SIGTERM
