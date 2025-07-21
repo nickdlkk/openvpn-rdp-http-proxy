@@ -8,7 +8,7 @@ RUN apt update && \
         iproute2 \
         socat \
         squid \
-        curl net-tools \
+        curl net-tools dnsutils tcpdump \
         ca-certificates && \
     # 清理缓存
     apt clean && \
