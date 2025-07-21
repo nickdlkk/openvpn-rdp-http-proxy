@@ -95,15 +95,33 @@ curl --proxy http://localhost:18080 https://ipinfo.io/ip
 
 ### 容器内网络诊断
 
-容器内置网络工具包：
+容器内置以下网络工具包，可用于诊断和调试网络连接：
+
+| 命令 | 功能描述 | 所属软件包 | 使用示例 |
+|------|----------|----------|
+| ping | 测试网络连通性 | iputils-ping | `ping 8.8.8.8` |
+| ifconfig | 查看/配置网络接口 | net-tools | `ifconfig tun0` |
+| netstat | 查看网络连接状态 | net-tools | `netstat -tuln` |
+| dig | DNS查询工具 | dnsutils | `dig google.com` |
+| nslookup | DNS域名解析 | dnsutils | `nslookup google.com` |
+| tcpdump | 网络抓包工具 | tcpdump | `tcpdump -i tun0` |
+| curl | HTTP客户端工具 | curl | `curl --proxy http://localhost:8000 https://ipinfo.io/ip` |
+| mtr  | 网络连通性和路由跟踪工具 | mtr | `mtr 8.8.8.8` |
+| nmap | 网络扫描工具 | nmap | `nmap -sS 8.8.8.8` |
+
+
+使用方法：
 ```bash
 docker exec -it vpn-proxy bash
 
-# 诊断命令示例
-ping 8.8.8.8
-nslookup google.com
+# 示例：测试与目标服务器连通性
+ping $RDP_TARGET
+
+# 示例：查看VPN接口配置
 ifconfig tun0
-curl --proxy http://localhost:8000 https://ipinfo.io/ip
+
+# 示例：检查代理服务状态
+netstat -tuln | grep $SQUID_PORT
 ```
 
 
