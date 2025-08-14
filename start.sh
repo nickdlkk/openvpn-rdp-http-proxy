@@ -5,6 +5,16 @@ set -e
 # Start squid service
 start_squid()
 {
+    # 清理可能存在的 PID 文件
+    if [ -f /run/squid.pid ]; then
+        echo "Cleaning up stale Squid PID file..."
+        rm -f /run/squid.pid
+    fi
+    
+    # 确保 Squid 进程完全停止
+    service squid stop 2>/dev/null || true
+    sleep 2
+    
     service squid start
     if [ ! `service squid status | grep "squid is running" | wc -l` -gt 0 ]; then 
         echo "Error: failed to start squid service" >&2; 
